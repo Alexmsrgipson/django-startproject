@@ -1,0 +1,26 @@
+<!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
+{% extends 'flatpages/default.html' %}
+
+<!-- Название у нас будет products -->
+{% block title %}
+Products
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+<h3>Статья № {{ posts.id }}</h3>
+
+<H4 align = "left">Заголовок: {{ posts.heading }}</H4>
+<br>
+<p align = "left"><b>Текст:</b> {{ posts.text }}</p>
+<br>
+<p align = "left"><b>Категория:</b> {{ posts.category }}</p>
+
+<p align = "left"><b>Рейтинг:</b> {{ posts.rating }}</p>
+
+<p align = "left"><b>Дата публикации:</b> {{ posts.data_create }}</p>
+
+
+{% endblock content %}
+
+
