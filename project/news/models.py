@@ -10,7 +10,8 @@ class Author(models.Model):
 
 class Categories(models.Model):
     name = models.CharField(max_length=255, unique=True)
-
+    # def __str__(self):
+    #     return {self.name}
 
 class Post(models.Model):
     user = models.ForeignKey(Author, on_delete=models.CASCADE, )  # связь «один ко многим» с моделью Author;
@@ -92,3 +93,6 @@ class Comment(models.Model):
     #     self.rating -= self.rating
     #     self.save()
     #     return self.rating
+
+    # def __str__(self):
+    #     return {self.text.title}
