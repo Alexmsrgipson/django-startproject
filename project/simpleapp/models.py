@@ -34,3 +34,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name.title()
+
+class Material(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+class ProductMaterial(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    material = models.ForeignKey(Material, on_delete=models.CASCADE)
