@@ -26,8 +26,10 @@ SECRET_KEY = 'django-insecure-ili+48yedvuo8ve5s9hy1j)pzof#drg#02dp_syj$w0d)@udy-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
+LOGIN_URL = 'sign/login/'
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -47,6 +49,8 @@ INSTALLED_APPS = [
     'django_filters',
 
     # 'fpages',
+    'sign',
+    'protect',
 ]
 
 SITE_ID = 1

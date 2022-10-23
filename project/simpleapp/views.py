@@ -1,7 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from django.views.generic import (
-    ListView, DetailView, CreateView, UpdateView, DeleteView
-)
+from django.views.generic import (ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView)
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .filters import ProductFilter
 from .forms import ProductForm
@@ -39,7 +39,9 @@ class ProductCreate(CreateView):
 
 
 # Добавляем представление для изменения товара.
-class ProductUpdate(UpdateView):
+class ProductUpdate(LoginRequiredMixin,  UpdateView):
+    login_url = '/admin/login/'
+    redirect_field_name = 'redirect_to'
     form_class = ProductForm
     model = Product
     template_name = 'product_edit.html'
