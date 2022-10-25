@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import dotenv_values
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,9 +52,17 @@ INSTALLED_APPS = [
     # 'fpages',
     'sign',
     'protect',
+    # 'appointment',
+    'appointment.apps.AppointmentConfig',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'django_apscheduler',
 ]
 
 SITE_ID = 1
+
+DEFAULT_FROM_EMAIL = 'pst-solution@yandex.ru'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,6 +89,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -89,6 +99,8 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
+
+
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
@@ -100,6 +112,8 @@ DATABASES = {
 
 
 # Password validation
+
+
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -119,6 +133,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
+
+
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
@@ -145,3 +161,31 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+config = dotenv_values(".env")
+
+EMAIL_HOST = 'smtp.yandex.ru'  # адрес сервера Яндекс-почты для всех один и тот же
+EMAIL_PORT = 465  # порт smtp сервера тоже одинаковый
+EMAIL_HOST_USER = 'pst-solution'  # ваше имя пользователя, например, если ваша почта user@yandex.ru, то сюда надо писать user, иными словами, это всё то что идёт до собаки
+EMAIL_HOST_PASSWORD = 'K$c1sCQ"9L1=qXvkU<7}}4JM~vKv0-|+'
+   # пароль от почты
+EMAIL_USE_SSL = True
+# Яндекс использует ssl, подробнее о том, что это, почитайте в дополнительных источниках, но включать его здесь обязательно
+
+ADMINS = [
+    ('Alex', 'pst-sistema@gmail.com'),
+    # список всех админов в формате ('имя', 'их почта')
+]
+SERVER_EMAIL = 'pst-solution@yandex.ru'  # это будет у нас вместо аргумента FROM в массовой рассылке
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + '@yandex.ru'
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25

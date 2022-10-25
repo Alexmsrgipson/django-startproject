@@ -26,4 +26,7 @@ urlpatterns = [
 
     path('sign/', include('sign.urls')),
     path('', include('protect.urls')),
+    # path('appointment/', include('appointment.urls')),
+    # path('appointment/', include(('appointment.urls', 'appointment'), namespace='appointment')),
+    path('accounts/', include('allauth.urls')),
 ]
